@@ -1,0 +1,18 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/saleor/saleor
+  tag: "3.20"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+keda:
+  minReplicas: 1
+  maxReplicas: 10
+  queueLength: "10"

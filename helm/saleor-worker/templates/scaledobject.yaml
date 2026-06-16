@@ -1,0 +1,16 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: saleor-worker-scaler
+  namespace: saleor
+spec:
+  scaleTargetRef:
+    name: saleor-worker
+  minReplicaCount: {{ .Values.keda.minReplicas }}
+  maxReplicaCount: {{ .Values.keda.maxReplicas }}
+  triggers:
+  - type: redis
+    metadata:
+      address: redis.saleor.svc.cluster.local:6379
+      listName: celery
+      listLength: {{ .Values.keda.queueLength }}

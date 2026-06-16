@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saleor-core
+  namespace: saleor
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: saleor-core
+  template:
+    metadata:
+      labels:
+        app: saleor-core
+    spec:
+      initContainers:
+      - name: migrate
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["python", "manage.py", "migrate", "--noinput"]
+        envFrom:
+        - secretRef:
+            name: saleor-secrets
+        env:
+        - name: DATABASE_URL
+          value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+      containers:
+      - name: saleor-core
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "saleor.asgi:application", "-k", "uvicorn.workers.UvicornWorker"]
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - secretRef:
+            name: saleor-secrets
+        env:
+        - name: DATABASE_URL
+          value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+        - name: ALLOWED_HOSTS
+          value: "api.samadov.xyz,localhost"
+        - name: ALLOWED_CLIENT_HOSTS
+          value: "shop.samadov.xyz,dashboard.samadov.xyz,localhost"
+        - name: DEFAULT_FROM_EMAIL
+          value: "noreply@samadov.xyz"
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        readinessProbe:
+          httpGet:
+            path: /health/
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10

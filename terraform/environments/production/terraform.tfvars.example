@@ -1,0 +1,18 @@
+# Copy to terraform.tfvars and fill in your values
+# NEVER commit terraform.tfvars to git
+
+aws_region           = "us-east-1"
+project_name         = "commerce-platform"
+environment          = "production"
+
+# Find your IP: curl ifconfig.me
+your_ip_cidr         = "212.87.195.173/32"
+
+# Your existing key pair from Projects 1 and 2
+key_name             = "gitops-k8s-platform-key"
+
+# Strong password for Postgres
+db_password          = "77cbcb80d4294320bebd395d5ea1c999"
+
+server_instance_type = "m7i-flex.large"
+agent_instance_type  = "m7i-flex.large"

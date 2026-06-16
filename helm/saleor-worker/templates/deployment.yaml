@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saleor-worker
+  namespace: saleor
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: saleor-worker
+  template:
+    metadata:
+      labels:
+        app: saleor-worker
+    spec:
+      containers:
+      - name: saleor-worker
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command: ["celery", "-A", "saleor", "worker", "--loglevel=info", "-Q", "celery,search_index_rebuild"]
+        envFrom:
+        - secretRef:
+            name: saleor-secrets
+        env:
+        - name: DATABASE_URL
+          value: "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)"
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}

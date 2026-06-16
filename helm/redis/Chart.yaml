@@ -1,0 +1,4 @@
+apiVersion: v2
+name: redis
+description: Redis cache and Celery broker for Saleor
+version: 0.1.0

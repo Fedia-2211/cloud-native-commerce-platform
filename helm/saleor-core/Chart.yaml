@@ -1,0 +1,7 @@
+apiVersion: v2
+name: saleor-core
+description: Saleor Commerce API
+version: 0.1.0
+appVersion: "3.20"
+
+

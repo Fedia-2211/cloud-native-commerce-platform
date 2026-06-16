@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: saleor-core
+  namespace: saleor
+spec:
+  selector:
+    app: saleor-core
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: 8000

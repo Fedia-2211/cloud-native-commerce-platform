@@ -1,0 +1,4 @@
+apiVersion: v2
+name: saleor-worker
+description: Saleor Celery Worker with KEDA autoscaling
+version: 0.1.0
