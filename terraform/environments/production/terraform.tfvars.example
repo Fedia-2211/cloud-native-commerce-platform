@@ -12,7 +12,7 @@ your_ip_cidr         = "212.87.195.173/32"
 key_name             = "gitops-k8s-platform-key"
 
 # Strong password for Postgres
-db_password          = "77cbcb80d4294320bebd395d5ea1c999"
+db_password          = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 server_instance_type = "m7i-flex.large"
 agent_instance_type  = "m7i-flex.large"

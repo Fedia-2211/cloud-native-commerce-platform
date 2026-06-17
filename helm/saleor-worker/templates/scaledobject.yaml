@@ -13,4 +13,4 @@ spec:
     metadata:
       address: redis.saleor.svc.cluster.local:6379
       listName: celery
-      listLength: {{ .Values.keda.queueLength }}
+      listLength: "{{ .Values.keda.queueLength }}"
