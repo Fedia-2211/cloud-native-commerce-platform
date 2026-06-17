@@ -1,0 +1,5 @@
+apiVersion: v2
+name: saleor-dashboard
+description: Saleor Admin Dashboard
+version: 0.1.0
+appVersion: "3.20"

@@ -1,0 +1,20 @@
+image:
+  repository: ghcr.io/saleor/saleor-dashboard
+  tag: "3.20"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+
+ingress:
+  host: dashboard.samadov.xyz
+
+apiUrl: "https://api.samadov.xyz/graphql/"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
