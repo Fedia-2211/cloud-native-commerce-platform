@@ -1,6 +1,6 @@
 image:
   repository: 176899553634.dkr.ecr.us-east-1.amazonaws.com/cloud-native-commerce-platform/saleor-storefront
-  tag: "884bcb314bd3b3fcbd5ad0fbcc2ca33e13c3db50"
+  tag: "3f201595f8adaf7dc315059df8acc68943a9d9da"
 
 service:
   port: 3000
