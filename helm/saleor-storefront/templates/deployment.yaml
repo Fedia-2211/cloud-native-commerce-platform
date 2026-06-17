@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saleor-storefront
+  namespace: saleor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: saleor-storefront
+  template:
+    metadata:
+      labels:
+        app: saleor-storefront
+    spec:
+      imagePullSecrets:
+      - name: ecr-pull-secret
+      containers:
+      - name: saleor-storefront
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 3000
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5

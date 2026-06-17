@@ -1,0 +1,17 @@
+image:
+  repository: 176899553634.dkr.ecr.us-east-1.amazonaws.com/cloud-native-commerce-platform/saleor-storefront
+  tag: "latest"
+
+service:
+  port: 3000
+
+ingress:
+  host: shop.samadov.xyz
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: saleor-storefront
+description: Saleor Commerce Storefront
+version: 0.1.0
