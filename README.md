@@ -28,13 +28,7 @@
 
 ## Architecture
 
-```
-### System Architecture
-Infrastructure diagram showing VPC topology, EC2 instances, RDS database, and AWS service integrations.
-
 ![Cloud-Native Architecture](docs/screenshots/Architecture.png)
-
-```
 
 ---
 
@@ -388,7 +382,7 @@ Stopped overnight (EC2 + RDS): ~$1.18/day baseline. Full week cost: ~$20.
 ### Grafana — Kubernetes Cluster Resources
 ![Grafana Cluster](docs/screenshots/grafana-cluster.png)
 
-### Grafana — Node Exporter System Metrics
+### Grafana — Loki and logs
 ![Grafana Nodes](docs/screenshots/grafana-loki-logs.png)
 
 ### Saleor Admin Dashboard
@@ -408,6 +402,7 @@ Stopped overnight (EC2 + RDS): ~$1.18/day baseline. Full week cost: ~$20.
 ## Author
 
 **Firdavs Samadov**
+
 DevOps & Cloud Engineering 
 
 [GitHub](https://github.com/Fedia-2211) · [LinkedIn](https://www.linkedin.com/in/firdavs-samadov-0b82603b6/)
