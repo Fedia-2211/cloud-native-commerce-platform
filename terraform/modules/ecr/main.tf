@@ -13,17 +13,20 @@ locals {
 resource "aws_ecr_repository" "repos" {
   for_each             = toset(local.repositories)
   name                 = "${var.project_name}/${each.key}"
-  image_tag_mutability = "MUTABLE"
+  image_tag_mutability = "IMMUTABLE"
   force_delete         = true
 
+  encryption_configuration {
+    encryption_type = "AES256"
+  }
+
   image_scanning_configuration {
-    scan_on_push = true # automatic Trivy-like scanning on every push
+    scan_on_push = true
   }
 
   tags = { Name = "${var.project_name}/${each.key}" }
 }
 
-# Lifecycle policy - keep only last 10 images to save storage cost
 resource "aws_ecr_lifecycle_policy" "repos" {
   for_each   = aws_ecr_repository.repos
   repository = each.value.name
@@ -40,21 +43,4 @@ resource "aws_ecr_lifecycle_policy" "repos" {
       action = { type = "expire" }
     }]
   })
-}
-
-resource "aws_ecr_repository" "repos" {
-  for_each             = toset(local.repositories)
-  name                 = "${var.project_name}/${each.key}"
-  image_tag_mutability = "IMMUTABLE"
-  force_delete         = true
-
-  encryption_configuration {
-    encryption_type = "AES256"
-  }
-
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-
-  tags = { Name = "${var.project_name}/${each.key}" }
 }

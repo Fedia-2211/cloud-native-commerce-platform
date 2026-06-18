@@ -12,7 +12,9 @@ spec:
     helm:
       values: |
         grafana:
-          adminPassword: "GrafanaAdmin2024"
+          admin:
+            existingSecret: grafana-admin-secret
+            existingSecretPasswordKey: password
           ingress:
             enabled: true
             ingressClassName: nginx

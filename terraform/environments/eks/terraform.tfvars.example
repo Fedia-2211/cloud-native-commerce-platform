@@ -1,0 +1,13 @@
+# Copy to terraform.tfvars — never commit
+
+aws_region         = "us-east-1"
+project_name       = "commerce-platform"
+environment        = "eks"
+your_ip_cidr       = "212.87.195.173/32"
+key_name           = "gitops-k8s-platform-key"
+node_instance_type = "m7i-flex.large"
+
+# Get this from k3s production state:
+# terraform -chdir=terraform/environments/production output
+# Look for: module.security.rds_sg_id
+rds_sg_id = "sg-05233e8ffcc187200"
